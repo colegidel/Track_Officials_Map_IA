@@ -1,13 +1,11 @@
-# Iowa officials widget · V9
+# Iowa officials widget · V10
 
-V9 replaces the map engine completely with MapLibre GL JS 5.6.2 and the OpenFreeMap Liberty vector basemap. No previous map engine or public raster tile endpoint is loaded.
+Upload index.html to GitHub Pages or other HTTPS static hosting, or paste embed.html into a custom HTML block allowing JavaScript, CSS, and external resources. No backend, build process, or API key is needed. MapLibre GL JS and the OpenFreeMap Liberty basemap require internet and WebGL support. Keep map attribution visible.
 
-Upload index.html to GitHub Pages or other HTTPS static hosting. Alternatively paste embed.html into one custom HTML block that permits inline JavaScript/CSS and the external resources. No backend, build process, or API key is required. Internet access and a WebGL-capable browser are required.
+Selecting a region from the map or dropdown now fits the complete region outline using the same padding as Show Region. Users can zoom in manually and click Show Region to return to that overview. Show State changes only the map view and preserves filters. The sole Reset Filters button is in the map toolbar; it restores All Iowa, clears search, and checks the certified-starters filter.
 
-Your host must allow unpkg.com, tiles.openfreemap.org, the sources referenced by its style, and the MapLibre worker (blob:). Keep all background-map attribution visible. See https://openfreemap.org/quick_start/ and https://maplibre.org/ .
+All 160 roster entries and the preceding contact-card, mobile-dialog, and controlled-dropdown features remain. The data and region footprints are unchanged. The roster is embedded and does not sync automatically.
 
-The 160 embedded records, five region outlines, standard-official classification, centered mobile contact dialog, custom closed-on-map-click region picker, and V7 filter-preserving view buttons remain. Region selection starts closer in; Show Region fits its outline. Show Iowa changes the camera only. Reset Filters restores All Iowa, clears search, and checks certified starters.
+For local preview on this Mac, unzip and double-click Start local preview.command; Python 3 is needed. Keep its Terminal window open.
 
-For local preview, unzip and double-click Start local preview.command on this Mac. Python 3 is needed; keep the Terminal window open. Local preview is not required on GitHub Pages. Source rosters do not automatically sync into the HTML.
-
-Regions retain the previously inferred footprints. Positions are approximate ZIP representative points, with the existing Davenport city fallback. Street addresses are excluded from the widget. Bill Neal's duplicate was consolidated; the two possible Alecia duplicates remain. Justin Parson's phone remains unavailable in the public card until verified.
+Sources: supplied regional officials PDFs, Census ZIP representative points and regional geometry derived from Iowa counties. Map engine: https://maplibre.org/ ; background: https://openfreemap.org/quick_start/ .
