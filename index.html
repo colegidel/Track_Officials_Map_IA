@@ -3,10 +3,10 @@
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Iowa Track Officials | Find a Starter</title></head>
 <body style="margin:0;background:#f4f5f7">
 <!-- COPY THE EMBED FROM HERE -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.css">
 <style>
 #iowa-officials{--ink:#142e42;--muted:#5d6f7a;--accent:#bd481f;font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:#f8fafb;max-width:1500px;margin:auto;text-align:left}
-#iowa-officials *{box-sizing:border-box}#iowa-officials button,#iowa-officials input,#iowa-officials select{font:inherit}#iowa-officials button,#iowa-officials a,#iowa-officials input,#iowa-officials select{touch-action:manipulation}#iowa-officials button{cursor:pointer}#iowa-officials :focus-visible{outline:3px solid #d2592e;outline-offset:3px}#iowa-officials h1,#iowa-officials h2,#iowa-officials p{margin:0}#iowa-officials button{border-radius:7px}#iowa-officials .io-header{padding:30px 36px 27px;border-bottom:1px solid #dce3e7;background:white;display:flex;align-items:center;justify-content:space-between;gap:24px}#iowa-officials .io-eyebrow{font-size:11px;font-weight:800;letter-spacing:2.2px;text-transform:uppercase;color:var(--accent);margin-bottom:7px}#iowa-officials h1{font-size:32px;line-height:1.2;letter-spacing:-1px;font-weight:750}#iowa-officials .io-intro{color:var(--muted);margin-top:9px;font-size:14px}#iowa-officials .io-edition{font-size:12px;border:1px solid #dce3e7;border-radius:30px;padding:8px 14px;white-space:nowrap;background:#f8fafb}#iowa-officials .io-main{display:grid;grid-template-columns:360px minmax(0,1fr)}#iowa-officials .io-sidebar{border-right:1px solid #dce3e7;background:#fff;min-width:0}#iowa-officials .io-filters{padding:24px 22px 20px;border-bottom:1px solid #dce3e7}#iowa-officials .io-label{display:block;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin:0 0 7px;color:#536674}#iowa-officials select,#iowa-officials input[type=search]{width:100%;padding:11px 12px;color:var(--ink);border:1px solid #cad4db;border-radius:7px;background:#fff;min-height:44px}#iowa-officials .io-search-label{margin-top:17px}#iowa-officials .io-toggle{display:flex;align-items:center;gap:9px;margin-top:17px;font-size:13px;font-weight:600;cursor:pointer}#iowa-officials input[type=checkbox]{width:18px;height:18px;accent-color:var(--accent)}#iowa-officials .io-summary{display:flex;align-items:center;justify-content:space-between;padding:16px 22px 12px;font-size:13px}#iowa-officials .io-text-button{background:none;border:0;color:var(--accent);font-size:12px;padding:4px;font-weight:650}#iowa-officials .io-results{height:430px;overflow:auto;overscroll-behavior:contain;padding:0 12px 12px}#iowa-officials .io-result{background:white;border:1px solid transparent;border-bottom-color:#e6ebee;border-radius:7px;width:100%;padding:14px 10px;text-align:left;display:flex;gap:11px;align-items:flex-start;color:var(--ink)}#iowa-officials .io-result:hover,#iowa-officials .io-result[aria-pressed=true]{background:#f7ede7;border-color:#edd1bf}#iowa-officials .io-avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;background:#edf1f4;color:#536674;font-size:11px;font-weight:750}#iowa-officials .io-person{display:block;font-size:14px;font-weight:700}#iowa-officials .io-place{display:block;font-size:12px;color:var(--muted);margin-top:2px}#iowa-officials .io-status{display:block;font-size:10px;font-weight:700;color:#4b6b5b;margin-top:5px}#iowa-officials .io-status.unknown{color:#647482;font-weight:500}#iowa-officials .io-arrow{margin-left:auto;color:#ab431e;font-size:20px}#iowa-officials .io-map-area{position:relative;min-width:0;background:#e9eef0}#iowa-officials .io-map-toolbar{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:#f8fafb;border-bottom:1px solid #dce3e7;gap:10px}#iowa-officials .io-map-toolbar strong{font-size:13px}#iowa-officials .io-map-toolbar span{font-size:11px;color:var(--muted);display:block}#iowa-officials .io-map-actions{display:flex;gap:6px}#iowa-officials .io-map-actions button{border:1px solid #ccd6dd;background:white;padding:7px 10px;color:var(--ink);font-size:12px;white-space:nowrap}#iowa-officials #io-map{height:580px;width:100%;z-index:0;background:#eaf0ef}#iowa-officials .io-legend{display:flex;flex-wrap:wrap;gap:16px;align-items:center;padding:12px 20px;background:white;border-top:1px solid #dce3e7;font-size:11px;color:#536674}#iowa-officials .io-legend span{display:flex;align-items:center;gap:6px}#iowa-officials .io-dot{height:9px;width:9px;border-radius:50%;display:inline-block;background:#ba491f}#iowa-officials .io-dot.gray{background:#627584}#iowa-officials .io-foot{padding:18px 26px;color:#5c6b75;font-size:11px;background:#fff;border-top:1px solid #dce3e7;display:flex;gap:15px;justify-content:space-between}#iowa-officials .io-foot details{max-width:470px}#iowa-officials .io-foot summary{cursor:pointer;white-space:nowrap}#iowa-officials a{color:#a43b18}#iowa-officials .io-marker{border:0;background:none}#iowa-officials .io-marker span{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;border:3px solid white;background:#ba491f;color:#fff;box-shadow:0 2px 7px #142e4245;font-size:12px;font-weight:800}#iowa-officials .io-marker.unknown span{background:#627584}#iowa-officials .io-marker.single span{width:19px;height:19px;margin:5px}#iowa-officials .leaflet-popup-content-wrapper{border-radius:10px}#iowa-officials .leaflet-popup-content{margin:19px;line-height:1.5;max-height:310px;overflow:auto;width:260px!important;font-family:system-ui,sans-serif}#iowa-officials .io-popup-heading{font-size:14px;font-weight:750;margin-bottom:10px}#iowa-officials .io-contact{padding:12px 0;border-top:1px solid #e0e6e9}#iowa-officials .io-contact h2{font-size:16px;font-weight:750}#iowa-officials .io-contact p{font-size:12px;color:#5d6f7a;margin-top:4px}#iowa-officials .io-contact .io-links{display:flex;gap:8px;margin-top:12px}#iowa-officials .io-links a{padding:7px 13px;border:1px solid #e4c5b9;border-radius:5px;color:#a43b18;font-size:12px;font-weight:700;text-decoration:none;background:#fdf7f3}#iowa-officials .io-empty{padding:30px 12px;color:var(--muted);font-size:14px}#iowa-officials .io-notice{display:none;background:#fff3dc;padding:14px 20px;font-size:12px}#iowa-officials .io-badge{font-size:10px;color:#7d3b20;background:#f6e9df;border-radius:4px;padding:3px 6px;margin-left:6px}
+#iowa-officials *{box-sizing:border-box}#iowa-officials button,#iowa-officials input,#iowa-officials select{font:inherit}#iowa-officials button,#iowa-officials a,#iowa-officials input,#iowa-officials select{touch-action:manipulation}#iowa-officials button{cursor:pointer}#iowa-officials :focus-visible{outline:3px solid #d2592e;outline-offset:3px}#iowa-officials h1,#iowa-officials h2,#iowa-officials p{margin:0}#iowa-officials button{border-radius:7px}#iowa-officials .io-header{padding:30px 36px 27px;border-bottom:1px solid #dce3e7;background:white;display:flex;align-items:center;justify-content:space-between;gap:24px}#iowa-officials .io-eyebrow{font-size:11px;font-weight:800;letter-spacing:2.2px;text-transform:uppercase;color:var(--accent);margin-bottom:7px}#iowa-officials h1{font-size:32px;line-height:1.2;letter-spacing:-1px;font-weight:750}#iowa-officials .io-intro{color:var(--muted);margin-top:9px;font-size:14px}#iowa-officials .io-edition{font-size:12px;border:1px solid #dce3e7;border-radius:30px;padding:8px 14px;white-space:nowrap;background:#f8fafb}#iowa-officials .io-main{display:grid;grid-template-columns:360px minmax(0,1fr)}#iowa-officials .io-sidebar{border-right:1px solid #dce3e7;background:#fff;min-width:0}#iowa-officials .io-filters{padding:24px 22px 20px;border-bottom:1px solid #dce3e7}#iowa-officials .io-label{display:block;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin:0 0 7px;color:#536674}#iowa-officials select,#iowa-officials input[type=search]{width:100%;padding:11px 12px;color:var(--ink);border:1px solid #cad4db;border-radius:7px;background:#fff;min-height:44px}#iowa-officials .io-search-label{margin-top:17px}#iowa-officials .io-toggle{display:flex;align-items:center;gap:9px;margin-top:17px;font-size:13px;font-weight:600;cursor:pointer}#iowa-officials input[type=checkbox]{width:18px;height:18px;accent-color:var(--accent)}#iowa-officials .io-summary{display:flex;align-items:center;justify-content:space-between;padding:16px 22px 12px;font-size:13px}#iowa-officials .io-text-button{background:none;border:0;color:var(--accent);font-size:12px;padding:4px;font-weight:650}#iowa-officials .io-results{height:430px;overflow:auto;overscroll-behavior:contain;padding:0 12px 12px}#iowa-officials .io-result{background:white;border:1px solid transparent;border-bottom-color:#e6ebee;border-radius:7px;width:100%;padding:14px 10px;text-align:left;display:flex;gap:11px;align-items:flex-start;color:var(--ink)}#iowa-officials .io-result:hover,#iowa-officials .io-result[aria-pressed=true]{background:#f7ede7;border-color:#edd1bf}#iowa-officials .io-avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;background:#edf1f4;color:#536674;font-size:11px;font-weight:750}#iowa-officials .io-person{display:block;font-size:14px;font-weight:700}#iowa-officials .io-place{display:block;font-size:12px;color:var(--muted);margin-top:2px}#iowa-officials .io-status{display:block;font-size:10px;font-weight:700;color:#4b6b5b;margin-top:5px}#iowa-officials .io-status.unknown{color:#647482;font-weight:500}#iowa-officials .io-arrow{margin-left:auto;color:#ab431e;font-size:20px}#iowa-officials .io-map-area{position:relative;min-width:0;background:#e9eef0}#iowa-officials .io-map-toolbar{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:#f8fafb;border-bottom:1px solid #dce3e7;gap:10px}#iowa-officials .io-map-toolbar strong{font-size:13px}#iowa-officials .io-map-toolbar span{font-size:11px;color:var(--muted);display:block}#iowa-officials .io-map-actions{display:flex;gap:6px}#iowa-officials .io-map-actions button{border:1px solid #ccd6dd;background:white;padding:7px 10px;color:var(--ink);font-size:12px;white-space:nowrap}#iowa-officials #io-map{height:580px;width:100%;z-index:0;background:#eaf0ef}#iowa-officials .io-legend{display:flex;flex-wrap:wrap;gap:16px;align-items:center;padding:12px 20px;background:white;border-top:1px solid #dce3e7;font-size:11px;color:#536674}#iowa-officials .io-legend span{display:flex;align-items:center;gap:6px}#iowa-officials .io-dot{height:9px;width:9px;border-radius:50%;display:inline-block;background:#ba491f}#iowa-officials .io-dot.gray{background:#627584}#iowa-officials .io-foot{padding:18px 26px;color:#5c6b75;font-size:11px;background:#fff;border-top:1px solid #dce3e7;display:flex;gap:15px;justify-content:space-between}#iowa-officials .io-foot details{max-width:470px}#iowa-officials .io-foot summary{cursor:pointer;white-space:nowrap}#iowa-officials a{color:#a43b18}#iowa-officials .io-marker{border:0;background:none}#iowa-officials .io-marker span{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;border:3px solid white;background:#ba491f;color:#fff;box-shadow:0 2px 7px #142e4245;font-size:12px;font-weight:800}#iowa-officials .io-marker.unknown span{background:#627584}#iowa-officials .io-marker.single span{width:19px;height:19px;margin:5px}#iowa-officials .maplibregl-popup-content-wrapper{border-radius:10px}#iowa-officials .maplibregl-popup-content{margin:19px;line-height:1.5;max-height:310px;overflow:auto;width:260px!important;font-family:system-ui,sans-serif}#iowa-officials .io-popup-heading{font-size:14px;font-weight:750;margin-bottom:10px}#iowa-officials .io-contact{padding:12px 0;border-top:1px solid #e0e6e9}#iowa-officials .io-contact h2{font-size:16px;font-weight:750}#iowa-officials .io-contact p{font-size:12px;color:#5d6f7a;margin-top:4px}#iowa-officials .io-contact .io-links{display:flex;gap:8px;margin-top:12px}#iowa-officials .io-links a{padding:7px 13px;border:1px solid #e4c5b9;border-radius:5px;color:#a43b18;font-size:12px;font-weight:700;text-decoration:none;background:#fdf7f3}#iowa-officials .io-empty{padding:30px 12px;color:var(--muted);font-size:14px}#iowa-officials .io-notice{display:none;background:#fff3dc;padding:14px 20px;font-size:12px}#iowa-officials .io-badge{font-size:10px;color:#7d3b20;background:#f6e9df;border-radius:4px;padding:3px 6px;margin-left:6px}
 @media(min-width:1200px){#iowa-officials #io-map{height:620px}#iowa-officials .io-results{height:470px}}
 @media(max-width:760px){#iowa-officials .io-header{padding:23px 20px;align-items:flex-start}#iowa-officials h1{font-size:26px}#iowa-officials .io-edition{display:none}#iowa-officials .io-main{display:flex;flex-direction:column}#iowa-officials .io-sidebar{display:contents}#iowa-officials .io-filters{order:0;padding:18px 20px;display:grid;grid-template-columns:1fr 1fr;gap:12px}#iowa-officials .io-search-label{margin-top:0}#iowa-officials .io-toggle{grid-column:1/-1;margin-top:0}#iowa-officials .io-map-area{order:1}#iowa-officials #io-map{height:380px}#iowa-officials .io-summary{order:2;background:white}#iowa-officials .io-results{order:3;height:360px;background:white}#iowa-officials .io-map-toolbar{padding:12px}#iowa-officials .io-map-toolbar span{max-width:165px}#iowa-officials .io-foot{flex-direction:column;padding:18px 20px}#iowa-officials .io-legend{gap:10px;font-size:10px}}
 
@@ -28,7 +28,7 @@
 #iowa-officials #io-mobile-contact-body{padding:16px 20px;overflow:auto;overscroll-behavior:contain;min-height:0;overflow-wrap:anywhere}
 #iowa-officials #io-mobile-contact .io-contact{padding:14px 0}
 #iowa-officials #io-mobile-contact .io-links a{min-height:44px;display:flex;align-items:center;padding:10px 18px}
-@media(max-width:760px){#iowa-officials .leaflet-popup{display:none!important}}
+@media(max-width:760px){#iowa-officials .maplibregl-popup{display:none!important}}
 #iowa-officials .io-map-toolbar{justify-content:flex-end}
 
 #iowa-officials #io-region-picker{position:relative}
@@ -38,6 +38,12 @@
 #iowa-officials .io-region-options button{display:block;width:100%;border:0;background:#fff;color:var(--ink);text-align:left;padding:10px 12px;min-height:44px}
 #iowa-officials .io-region-options button:hover,#iowa-officials .io-region-options button:focus-visible{background:#f7ede7}
 #iowa-officials select[hidden]{display:none!important}
+
+#iowa-officials .io-marker{z-index:2}
+#iowa-officials button.io-marker{width:30px;height:30px;padding:0;border:0;background:transparent;border-radius:50%}
+#iowa-officials .maplibregl-popup-content{font:13px/1.5 system-ui,sans-serif;padding:24px 18px 16px;border-radius:10px;max-height:350px;overflow:auto;overflow-wrap:anywhere}
+#iowa-officials .maplibregl-popup-close-button{width:30px;height:30px;font-size:24px}
+#iowa-officials .maplibregl-ctrl-attrib{font-size:10px}
 </style>
 <section id="iowa-officials" aria-label="Iowa track officials directory">
  <div class="io-main">
@@ -61,7 +67,7 @@
  <div id="io-mobile-contact-body"></div>
 </dialog>
 </section>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/maplibre-gl@5.6.2/dist/maplibre-gl.js"></script>
 <script>
 (()=>{
 'use strict';
@@ -82,92 +88,140 @@ el('io-close-contact').addEventListener('click',closeMobileContact);
 mobileContact.addEventListener('click',event=>{if(event.target===mobileContact){const r=mobileContact.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)closeMobileContact();}});
 mobileQuery.addEventListener('change',closeMobileContact);
 const search=el('io-search'), certified=el('io-certified'), results=el('io-results');
-const stateBounds=[[40.375,-96.65],[43.55,-90.1]];
-let map,markers,regionLayer,filtered=[];
-const regionSelect=el("io-region");
-function selectRegion(region){
- regionSelect.value=region;
- el('io-region-current').textContent=region||'All Iowa';
- el('io-region-picker').open=false;
- draw();region?fitRegion(region):fitIowa();
-}
-el('io-region-picker').querySelectorAll('button[data-region]').forEach(button=>{
- button.addEventListener('click',()=>selectRegion(button.dataset.region));
-});
-document.addEventListener('click',event=>{if(!el('io-region-picker').contains(event.target))el('io-region-picker').open=false;});
-el('io-region-picker').addEventListener('keydown',event=>{
- if(event.key==='Escape'){el('io-region-picker').open=false;el('io-region-picker').querySelector('summary').focus();}
-});
-function fitIowa(){if(map) map.fitBounds(stateBounds,{padding:[18,18]});}
-function fitRegion(region){if(!map)return;const bounds=L.latLngBounds([]);regionLayer.eachLayer(l=>{if(l.feature.properties.region===region)bounds.extend(l.getBounds());});filtered.forEach(o=>bounds.extend([o.lat,o.lng]));if(bounds.isValid()){const fittedZoom=map.getBoundsZoom(bounds,false,L.point(48,48));map.setView(bounds.getCenter(),Math.min(fittedZoom+1,map.getMaxZoom()));}}
-function regionStyle(f){const r=f.properties.region;const active=regionSelect.value;return {className:'io-region-shape',color:colors[r],weight:1.5,opacity:active?(active===r?.75:0):.75,fillColor:colors[r],fillOpacity:active?(active===r?.14:0):.14};}
-const pinById=new Map();
+const stateBounds=[[-96.65,40.375],[-90.1,43.55]];
+let map,filtered=[],markers=[],activePopup=null,styleReady=false,regionHits=null;
+const regionSelect=el('io-region');
 function notice(text){el('io-notice').textContent=text;el('io-notice').style.display='block';}
-function card(o){return `<article class="io-contact"><h2>${esc(fullName(o))}</h2><p>${o.certified?'Certified Starter':'Standard Official'}</p><p>${esc(o.city)}, ${esc(o.state)} · ${esc(o.zip)} · ${esc(o.region)} Region</p><p>${o.phone?esc(o.phone):"Phone not verified"}<br>${esc(o.email)}</p><div class="io-links">${o.phone?`<a href="tel:${o.phone.replace(/[^\d+]/g,'')}" aria-label="Call ${esc(fullName(o))}">Call</a>`:""}<a href="mailto:${esc(o.email)}" aria-label="Email ${esc(fullName(o))}">Email</a></div></article>`;}
+function boundsFor(region){
+ const b=new maplibregl.LngLatBounds();
+ const features=region?regions.features.filter(f=>f.properties.region===region):regions.features;
+ function visit(coords){if(typeof coords[0]==='number')b.extend(coords);else coords.forEach(visit);}
+ features.forEach(f=>visit(f.geometry.coordinates));return b;
+}
+function fitIowa(){if(map)map.fitBounds(stateBounds,{padding:18,duration:350});}
+function showFullRegion(){if(!map)return;map.fitBounds(regionSelect.value?boundsFor(regionSelect.value):stateBounds,{padding:24,duration:350});}
+function fitRegion(region){
+ if(!map)return;
+ const b=boundsFor(region);
+ // Keep the one-step closer regional view requested in V4.
+ const c=map.cameraForBounds(b,{padding:24});
+ if(c)map.easeTo({center:c.center,zoom:Math.min(c.zoom+1,15),duration:350});
+}
+function fit(){if(map&&filtered.length){const b=new maplibregl.LngLatBounds();filtered.forEach(o=>b.extend([o.lng,o.lat]));map.fitBounds(b,{padding:40,maxZoom:10,duration:250});}}
+function selectRegion(region){
+ regionSelect.value=region;el('io-region-current').textContent=region||'All Iowa';
+ el('io-region-picker').open=false;draw();region?fitRegion(region):fitIowa();
+}
+el('io-region-picker').querySelectorAll('button[data-region]').forEach(b=>b.addEventListener('click',()=>selectRegion(b.dataset.region)));
+document.addEventListener('click',e=>{if(!el('io-region-picker').contains(e.target))el('io-region-picker').open=false;});
+el('io-region-picker').addEventListener('keydown',e=>{if(e.key==='Escape'){el('io-region-picker').open=false;el('io-region-picker').querySelector('summary').focus();}});
 function highlight(id){results.querySelectorAll('button[data-id]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.id)===id)));}
-function fit(){if(map&&filtered.length)map.fitBounds(filtered.map(o=>[o.lat,o.lng]),{padding:[40,40],maxZoom:10});}
-function choose(o){highlight(o.id);if(!map){notice('Map unavailable. Contact details appear below.');el('io-map').innerHTML=card(o);return;}const marker=pinById.get(o.id);map.setView([o.lat,o.lng],Math.max(map.getZoom(),10));marker.setPopupContent(`<div class="io-popup-heading">${esc(o.city)} · ZIP ${o.zip.slice(0,5)}</div>${card(o)}<p style="font-size:11px;color:#687680">${o.approxCity?"Approximate city location":"Approximate ZIP-area location"}</p>`).openPopup();}
+function card(o){return `<article class="io-contact"><h2>${esc(fullName(o))}</h2><p>${o.certified?'Certified Starter':'Standard Official'}</p><p>${esc(o.city)}, ${esc(o.state)} · ${esc(o.zip)} · ${esc(o.region)} Region</p><p>${o.phone?esc(o.phone):"Phone not verified"}<br>${esc(o.email)}</p><div class="io-links">${o.phone?`<a href="tel:${o.phone.replace(/[^\d+]/g,'')}" aria-label="Call ${esc(fullName(o))}">Call</a>`:""}<a href="mailto:${esc(o.email)}" aria-label="Email ${esc(fullName(o))}">Email</a></div></article>`;}
+function openContact(html,point){
+ if(activePopup){activePopup.remove();activePopup=null;}
+ if(mobileQuery.matches){
+  el('io-mobile-contact-body').innerHTML=html;
+  if(!mobileContact.open)mobileContact.showModal();
+ }else if(map){
+  activePopup=new maplibregl.Popup({maxWidth:'320px',offset:18,closeOnClick:true})
+   .setLngLat(point).setHTML(html).addTo(map);
+ }else {notice('Map unavailable. Contact details appear below.');el('io-map').innerHTML=html;}
+}
+function choose(o){
+ highlight(o.id);
+ if(map)map.easeTo({center:[o.lng,o.lat],zoom:Math.max(map.getZoom(),10),duration:0});
+ openContact('<div class="io-popup-heading">'+esc(o.city)+' · ZIP '+o.zip.slice(0,5)+'</div>'+card(o)+
+ '<p style="font-size:11px;color:#687680">'+(o.approxCity?'Approximate city location':'Approximate ZIP-area location')+'</p>',[o.lng,o.lat]);
+}
+function updateRegionPaint(){
+ if(!map||!styleReady)return;
+ const r=regionSelect.value;
+ if(regionHits)regionHits.style.display=r?'none':'';
+ map.setPaintProperty('io-region-fill','fill-opacity',r?['case',['==',['get','region'],r],.14,0]:.14);
+ map.setPaintProperty('io-region-outline','line-opacity',r?['case',['==',['get','region'],r],.75,0]:.75);
+}
 function draw(){
- closeMobileContact();
+ closeMobileContact();if(activePopup){activePopup.remove();activePopup=null;}
  const q=search.value.trim().toLowerCase();
- filtered=officials.filter(o=>(!certified.checked||o.certified)&&(!regionSelect.value||o.region===regionSelect.value)&&`${fullName(o)} ${o.city} ${o.zip}`.toLowerCase().includes(q)).sort((a,b)=>a.lastName.localeCompare(b.lastName)||a.firstName.localeCompare(b.firstName));
-
- root.dataset.regionSelected=String(Boolean(regionSelect.value));
- if(regionLayer){regionLayer.setStyle(regionStyle);regionLayer.eachLayer(l=>{
-   l.closeTooltip();l.unbindTooltip();
-   if(!regionSelect.value)l.bindTooltip(l.feature.properties.region+' Region',{sticky:true});
- });}
- el('io-count').textContent=`${filtered.length} ${filtered.length===1?'official':'officials'} found`;
+ filtered=officials.filter(o=>(!certified.checked||o.certified)&&(!regionSelect.value||o.region===regionSelect.value)&&
+ (fullName(o)+' '+o.city+' '+o.zip).toLowerCase().includes(q))
+ .sort((a,b)=>a.lastName.localeCompare(b.lastName)||a.firstName.localeCompare(b.firstName));
+ updateRegionPaint();
+ el('io-count').textContent=filtered.length+' '+(filtered.length===1?'official':'officials')+' found';
  results.replaceChildren();
  if(!filtered.length){const p=document.createElement('p');p.className='io-empty';p.textContent='No officials match. Try another name, city, or ZIP, or turn off the certification filter.';results.append(p);}
- filtered.forEach(o=>{const b=document.createElement('button');b.type='button';b.className='io-result';b.dataset.id=o.id;b.setAttribute('aria-pressed','false');b.setAttribute('aria-label',`View ${fullName(o)}, ${o.city}`);b.innerHTML=`<span class="io-avatar" aria-hidden="true">${esc(o.firstName[0]+o.lastName[0])}</span><span><span class="io-person">${esc(fullName(o))}</span><span class="io-place">${esc(o.city)} · ${esc(o.zip.slice(0,5))}</span><span class="io-status ${o.certified?'':'unknown'}">${o.certified?'✓ Certified Starter':'Standard Official'}</span></span><span class="io-arrow" aria-hidden="true">›</span>`;b.addEventListener('click',()=>choose(o));results.append(b);});
+ filtered.forEach(o=>{
+  const b=document.createElement('button');b.type='button';b.className='io-result';b.dataset.id=o.id;b.setAttribute('aria-pressed','false');b.setAttribute('aria-label','View '+fullName(o)+', '+o.city);
+  b.innerHTML='<span class="io-avatar" aria-hidden="true">'+esc(o.firstName[0]+o.lastName[0])+'</span><span><span class="io-person">'+esc(fullName(o))+'</span><span class="io-place">'+esc(o.city)+' · '+esc(o.zip.slice(0,5))+'</span><span class="io-status '+(o.certified?'':'unknown')+'">'+(o.certified?'✓ Certified Starter':'Standard Official')+'</span></span><span class="io-arrow" aria-hidden="true">›</span>';
+  b.addEventListener('click',()=>choose(o));results.append(b);
+ });
+ markers.forEach(m=>m.remove());markers=[];
  if(!map)return;
- map.closePopup();markers.clearLayers();pinById.clear();
- const groups=new Map();filtered.forEach(o=>{const zip=o.zip.slice(0,5);if(!groups.has(zip))groups.set(zip,[]);groups.get(zip).push(o);});
- groups.forEach((group,zip)=>{const hasCertified=group.some(o=>o.certified);const icon=L.divIcon({className:`io-marker ${group.length===1?'single':''} ${hasCertified?'':'unknown'}`,html:`<span>${group.length>1?group.length:''}</span>`,iconSize:[30,30],iconAnchor:[15,15]});
- const m=L.marker([group[0].lat,group[0].lng],{icon,title:`ZIP ${zip}: ${group.length} ${group.length===1?'official':'officials'}`,alt:`Show officials in ZIP ${zip}`,keyboard:true}).addTo(markers);
- const popup=()=>`<div class="io-popup-heading">ZIP ${zip} · ${group.length} ${group.length===1?'official':'officials'}</div>${group.map(card).join('')}<p style="font-size:11px;color:#687680">${group[0].approxCity?"Approximate city location":"Approximate ZIP-area location"}</p>`;
- m.bindPopup(popup(),{maxWidth:320,minWidth:280,autoPan:!mobileQuery.matches});m.on('click',()=>{m.setPopupContent(popup());highlight(group.length===1?group[0].id:null);});
- m.getElement().setAttribute("aria-label",`ZIP ${zip}: ${group.length} ${group.length===1?"official":"officials"}`);
- m.bindTooltip(`${esc(group[0].city)} · ${group.length} ${group.length===1?'official':'officials'}`,{direction:'top'});group.forEach(o=>pinById.set(o.id,m));
+ const groups=new Map();filtered.forEach(o=>{const z=o.zip.slice(0,5);if(!groups.has(z))groups.set(z,[]);groups.get(z).push(o);});
+ groups.forEach((group,zip)=>{
+  const button=document.createElement('button');button.type='button';
+  button.className='io-marker '+(group.length===1?'single ':'')+(group.some(o=>o.certified)?'':'unknown');
+  const label='ZIP '+zip+': '+group.length+' '+(group.length===1?'official':'officials');
+  button.setAttribute('aria-label',label);button.title=group[0].city+' · '+label;
+  button.innerHTML='<span>'+(group.length>1?group.length:'')+'</span>';
+  button.addEventListener('click',event=>{
+   event.stopPropagation();highlight(group.length===1?group[0].id:null);
+   openContact('<div class="io-popup-heading">'+label+'</div>'+group.map(card).join('')+
+    '<p style="font-size:11px;color:#687680">'+(group[0].approxCity?'Approximate city location':'Approximate ZIP-area location')+'</p>',
+    [group[0].lng,group[0].lat]);
+  });
+  markers.push(new maplibregl.Marker({element:button}).setLngLat([group[0].lng,group[0].lat]).addTo(map));
  });
 }
-if(window.L){
- map=L.map(el('io-map'),{scrollWheelZoom:false,minZoom:6,maxZoom:15});
- map.on('popupopen',event=>{
-  if(!mobileQuery.matches)return;
-  el('io-mobile-contact-body').innerHTML=event.popup.getContent();
-  map.closePopup(event.popup);
-  if(!mobileContact.open)mobileContact.showModal();
- });
- const tiles=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'});
- if(location.protocol==='file:'){notice('For town labels and roads, open Start local preview.command from the download folder, or view this widget on your website. The background map cannot load reliably from a raw file.');}else{tiles.addTo(map);}
- let failures=0;tiles.on('tileerror',()=>{if(++failures===3){map.removeLayer(tiles);notice('Background map could not load. ZIP pins and contact listings are still available.');}});
- regionLayer=L.geoJSON(regions,{style:f=>({...regionStyle(f),className:'io-region-shape'}),onEachFeature:(f,l)=>{
- const r=f.properties.region;
- l.bindTooltip(r+' Region',{sticky:true});
- l.on('mouseover',()=>{if(!regionSelect.value)l.setStyle({fillOpacity:.25,weight:2});});
- l.on('mouseout',()=>regionLayer.resetStyle(l));
- l.on('click',()=>{if(!regionSelect.value)selectRegion(r);});
- }}).addTo(map);
- L.geoJSON(iowa,{interactive:false,style:{color:'#4b6c7c',weight:2,fillColor:'#d9e5df',fillOpacity:0.07}}).addTo(map);
- markers=L.layerGroup().addTo(map);
- if(window.ResizeObserver)new ResizeObserver(()=>map.invalidateSize()).observe(el('io-map'));
-}else notice('The map library could not load. You can still search officials and select a name to view contact details.');
+if(window.maplibregl){
+ try{
+  map=new maplibregl.Map({container:el('io-map'),style:'https://tiles.openfreemap.org/styles/liberty',
+   center:[-93.4,42],zoom:6,minZoom:5,maxZoom:15,attributionControl:true});
+  map.scrollZoom.disable();map.dragRotate.disable();map.touchZoomRotate.disableRotation();
+  map.addControl(new maplibregl.NavigationControl({showCompass:false}),'top-left');
+  map.on('load',()=>{
+   const color=['match',['get','region'],...Object.entries(colors).flat(),'#71818b'];
+   const before=map.getStyle().layers.find(l=>l.type==='symbol')?.id;
+   map.addSource('io-regions',{type:'geojson',data:regions});
+   map.addLayer({id:'io-region-fill',type:'fill',source:'io-regions',paint:{'fill-color':color,'fill-opacity':.14}},before);
+   map.addLayer({id:'io-region-outline',type:'line',source:'io-regions',paint:{'line-color':color,'line-width':1.5,'line-opacity':.75}},before);
+   map.addSource('io-state',{type:'geojson',data:iowa});
+   map.addLayer({id:'io-state-outline',type:'line',source:'io-state',paint:{'line-color':'#4b6c7c','line-width':2}},before);
+   regionHits=document.createElementNS('http://www.w3.org/2000/svg','svg');
+   regionHits.setAttribute('class','io-region-hits');
+   regionHits.style.cssText='position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1';
+   map.getCanvasContainer().append(regionHits);
+   const hitPaths=regions.features.map(feature=>{
+    const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('fill','transparent');path.style.pointerEvents='auto';path.style.cursor='pointer';
+    path.setAttribute('aria-label',feature.properties.region+' Region');path.setAttribute('role','button');path.setAttribute('tabindex','0');
+    let down=null;
+    path.addEventListener('pointerdown',e=>{down=[e.clientX,e.clientY];});
+    path.addEventListener('click',e=>{e.stopPropagation();if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])<6)selectRegion(feature.properties.region);down=null;});
+    path.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();selectRegion(feature.properties.region);}});
+    regionHits.append(path);return {path,feature};
+   });
+   function syncHitAreas(){hitPaths.forEach(({path,feature})=>{
+    const polygons=feature.geometry.type==='Polygon'?[feature.geometry.coordinates]:feature.geometry.coordinates;
+    const d=polygons.flatMap(rings=>rings.map(ring=>ring.map((point,i)=>{const p=map.project(point);return (i?'L':'M')+p.x+','+p.y;}).join('')+'Z')).join('');
+    path.setAttribute('d',d);
+   });}
+   map.on('move',syncHitAreas);map.on('resize',syncHitAreas);syncHitAreas();
+   styleReady=true;updateRegionPaint();
+   
+   map.on('mousemove','io-region-fill',()=>{map.getCanvas().style.cursor=regionSelect.value?'':'pointer';});
+   map.on('mouseleave','io-region-fill',()=>{map.getCanvas().style.cursor='';});
+  });
+  let errors=0;map.on('error',()=>{if(++errors===3)notice('The background map could not fully load. Check your connection; the official listings remain available.');});
+  if(window.ResizeObserver)new ResizeObserver(()=>map.resize()).observe(el('io-map'));
+ }catch(error){map=null;notice('This browser could not start the map. Use the searchable official list to view contact details.');}
+}else notice('The map library could not load. The searchable official list is still available.');
 search.addEventListener('input',()=>{draw();fit();});
 certified.addEventListener('change',()=>{draw();fit();});
 regionSelect.addEventListener('change',()=>selectRegion(regionSelect.value));
 function resetFilters(){search.value='';certified.checked=true;selectRegion('');}
 el('io-reset').addEventListener('click',resetFilters);
 el('io-reset-map').addEventListener('click',resetFilters);
-function showFullRegion(){
- if(!map)return;
- const region=regionSelect.value;
- if(!region){fitIowa();return;}
- const bounds=L.latLngBounds([]);
- regionLayer.eachLayer(layer=>{if(layer.feature.properties.region===region)bounds.extend(layer.getBounds());});
- if(bounds.isValid())map.fitBounds(bounds,{padding:[24,24]});
-}
 el('io-fit').addEventListener('click',showFullRegion);
 el('io-state').addEventListener('click',fitIowa);
 fitIowa();draw();
