@@ -17,3 +17,12 @@ On viewports up to 760 px wide, clicking a dot or a result opens contact details
 
 ## Opening the download on a Mac
 Unzip and double-click Start local preview.command. Keep its Terminal window open while viewing the map. It uses Python 3 and binds only to localhost. Raw file previews omit the background tiles because they cannot provide the web referrer required by the tile service. On your website, serve the embed over HTTPS and allow referrer headers for the tile requests.
+
+## V6 updates
+The map toolbar contains only Show results, All Iowa, and Reset filters. Reset clears search and region selection, returns to All Iowa, restores the certified-starters filter, and leaves focus on the clicked reset button. It does not focus or open the region selector.
+
+## V7 updates
+Show region fits the entire selected region outline while preserving region selection, search, and the certification filter. If All Iowa is selected, Show region fits Iowa. Show Iowa fits the state without changing any filters or the selected region. Reset filters retains the V6 behavior. Selecting a region still starts with the closer town-level view; Show region provides the full-region overview.
+
+## V8 updates
+Button capitalization updated to Show Region and Reset Filters. No behavior changes.

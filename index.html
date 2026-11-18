@@ -29,6 +29,7 @@
 #iowa-officials #io-mobile-contact .io-contact{padding:14px 0}
 #iowa-officials #io-mobile-contact .io-links a{min-height:44px;display:flex;align-items:center;padding:10px 18px}
 @media(max-width:760px){#iowa-officials .leaflet-popup{display:none!important}}
+#iowa-officials .io-map-toolbar{justify-content:flex-end}
 </style>
 <section id="iowa-officials" aria-label="Iowa track officials directory">
  <div class="io-main">
@@ -38,11 +39,11 @@
     <div><label class="io-label io-search-label" for="io-search">Find an official</label><input type="search" id="io-search" placeholder="Name, city, or ZIP" autocomplete="off"></div>
     <label class="io-toggle"><input type="checkbox" id="io-certified" checked> Certified starters only</label>
    </div>
-   <div class="io-summary"><strong id="io-count" role="status" aria-live="polite"></strong><button class="io-text-button" id="io-reset" type="button">Reset filters</button></div>
+   <div class="io-summary"><strong id="io-count" role="status" aria-live="polite"></strong><button class="io-text-button" id="io-reset" type="button">Reset Filters</button></div>
    <div id="io-results" class="io-results" aria-label="Matching officials"></div>
   </aside>
   <div class="io-map-area">
-   <div class="io-map-toolbar"><div><strong id="io-map-title">Explore Iowa</strong><span>Choose a region to zoom in, or select an official’s dot.</span></div><div class="io-map-actions"><button type="button" id="io-fit">Show results</button><button type="button" id="io-state">All Iowa</button><button type="button" id="io-reset-map">Reset filters</button></div></div>
+   <div class="io-map-toolbar"><div class="io-map-actions"><button type="button" id="io-fit">Show Region</button><button type="button" id="io-state">Show Iowa</button><button type="button" id="io-reset-map">Reset Filters</button></div></div>
    <div id="io-notice" class="io-notice" role="status"></div><div id="io-map" aria-label="Interactive map of Iowa officials"></div>
    <div class="io-legend"><span><i class="io-dot"></i> Certified starter</span><span><i class="io-dot gray"></i> Standard Official</span><span><b>2+</b> Multiple officials in a ZIP</span></div>
   </div>
@@ -76,7 +77,7 @@ const search=el('io-search'), certified=el('io-certified'), results=el('io-resul
 const stateBounds=[[40.375,-96.65],[43.55,-90.1]];
 let map,markers,regionLayer,filtered=[];
 const regionSelect=el("io-region");
-function selectRegion(region){regionSelect.value=region;draw();region?fitRegion(region):fitIowa();regionSelect.focus({preventScroll:true});}
+function selectRegion(region,focusRegion=false){regionSelect.value=region;draw();region?fitRegion(region):fitIowa();if(focusRegion)regionSelect.focus({preventScroll:true});}
 function fitIowa(){if(map) map.fitBounds(stateBounds,{padding:[18,18]});}
 function fitRegion(region){if(!map)return;const bounds=L.latLngBounds([]);regionLayer.eachLayer(l=>{if(l.feature.properties.region===region)bounds.extend(l.getBounds());});filtered.forEach(o=>bounds.extend([o.lat,o.lng]));if(bounds.isValid()){const fittedZoom=map.getBoundsZoom(bounds,false,L.point(48,48));map.setView(bounds.getCenter(),Math.min(fittedZoom+1,map.getMaxZoom()));}}
 function regionStyle(f){const r=f.properties.region;const active=regionSelect.value;return {className:'io-region-shape',color:colors[r],weight:1.5,opacity:active?(active===r?.75:0):.75,fillColor:colors[r],fillOpacity:active?(active===r?.14:0):.14};}
@@ -91,8 +92,6 @@ function draw(){
  const q=search.value.trim().toLowerCase();
  filtered=officials.filter(o=>(!certified.checked||o.certified)&&(!regionSelect.value||o.region===regionSelect.value)&&`${fullName(o)} ${o.city} ${o.zip}`.toLowerCase().includes(q)).sort((a,b)=>a.lastName.localeCompare(b.lastName)||a.firstName.localeCompare(b.firstName));
 
- el('io-map-title').textContent=regionSelect.value ? regionSelect.value+' Region' : 'Explore Iowa';
- el('io-map-title').nextElementSibling.textContent=regionSelect.value?'Select a dot to view contact details.':'Choose a region to zoom in, or select an official’s dot.';
  root.dataset.regionSelected=String(Boolean(regionSelect.value));
  if(regionLayer){regionLayer.setStyle(regionStyle);regionLayer.eachLayer(l=>{
    l.closeTooltip();l.unbindTooltip();
@@ -129,7 +128,7 @@ if(window.L){
  l.bindTooltip(r+' Region',{sticky:true});
  l.on('mouseover',()=>{if(!regionSelect.value)l.setStyle({fillOpacity:.25,weight:2});});
  l.on('mouseout',()=>regionLayer.resetStyle(l));
- l.on('click',()=>{if(!regionSelect.value)selectRegion(r);});
+ l.on('click',()=>{if(!regionSelect.value)selectRegion(r,true);});
  }}).addTo(map);
  L.geoJSON(iowa,{interactive:false,style:{color:'#4b6c7c',weight:2,fillColor:'#d9e5df',fillOpacity:0.07}}).addTo(map);
  markers=L.layerGroup().addTo(map);
@@ -141,8 +140,16 @@ regionSelect.addEventListener('change',()=>selectRegion(regionSelect.value));
 function resetFilters(){search.value='';certified.checked=true;selectRegion('');}
 el('io-reset').addEventListener('click',resetFilters);
 el('io-reset-map').addEventListener('click',resetFilters);
-el('io-fit').addEventListener('click',fit);
-el('io-state').addEventListener('click',()=>{selectRegion('');});
+function showFullRegion(){
+ if(!map)return;
+ const region=regionSelect.value;
+ if(!region){fitIowa();return;}
+ const bounds=L.latLngBounds([]);
+ regionLayer.eachLayer(layer=>{if(layer.feature.properties.region===region)bounds.extend(layer.getBounds());});
+ if(bounds.isValid())map.fitBounds(bounds,{padding:[24,24]});
+}
+el('io-fit').addEventListener('click',showFullRegion);
+el('io-state').addEventListener('click',fitIowa);
 fitIowa();draw();
 })();
 </script>
