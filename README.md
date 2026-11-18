@@ -1,4 +1,4 @@
-# Iowa officials embed widget · V5
+# Iowa officials embed widget · V8
 
 Use embed.html inside a custom HTML/code block that allows scripts, styles, and external libraries. Add once per page. Alternatively upload index.html to static hosting and embed that URL using an iframe. No backend, build step, API key, or database connection is needed. Internet access is needed for Leaflet and OpenStreetMap background tiles.
 
