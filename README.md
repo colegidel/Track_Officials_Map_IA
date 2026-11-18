@@ -1,28 +1,13 @@
-# Iowa officials embed widget · V8
+# Iowa officials widget · V9
 
-Use embed.html inside a custom HTML/code block that allows scripts, styles, and external libraries. Add once per page. Alternatively upload index.html to static hosting and embed that URL using an iframe. No backend, build step, API key, or database connection is needed. Internet access is needed for Leaflet and OpenStreetMap background tiles.
+V9 replaces the map engine completely with MapLibre GL JS 5.6.2 and the OpenFreeMap Liberty vector basemap. No previous map engine or public raster tile endpoint is loaded.
 
-V4 removes the page header and footer and merges the V2 county assignments into five region outlines. At the statewide view, clicking a region zooms into that area and filters the officials to that roster. Inside a region, overlays are hidden and no longer intercept clicks. Pan and zoom to inspect towns and click dots for contact details. The All Iowa button returns to regional selection. Region dropdown labels use short names with a spaced custom chevron, including on phones.
+Upload index.html to GitHub Pages or other HTTPS static hosting. Alternatively paste embed.html into one custom HTML block that permits inline JavaScript/CSS and the external resources. No backend, build process, or API key is required. Internet access and a WebGL-capable browser are required.
 
-The roster remains at 160 entries, including 114 explicitly certified starters. Data handling and contact exceptions are unchanged from V2. Street addresses are omitted. Pins remain approximate ZIP-area points, with one city-level fallback. Keep the master roster separately; changes there do not automatically update this snapshot.
+Your host must allow unpkg.com, tiles.openfreemap.org, the sources referenced by its style, and the MapLibre worker (blob:). Keep all background-map attribution visible. See https://openfreemap.org/quick_start/ and https://maplibre.org/ .
 
-The regional footprints retain the previously inferred V2 assignments, merged into continuous shapes; no official boundary verification has been added. Tooltips use the region name only, as requested.
+The 160 embedded records, five region outlines, standard-official classification, centered mobile contact dialog, custom closed-on-map-click region picker, and V7 filter-preserving view buttons remain. Region selection starts closer in; Show Region fits its outline. Show Iowa changes the camera only. Reset Filters restores All Iowa, clears search, and checks certified starters.
 
-Sources: five supplied regional officials PDFs; 2025 U.S. Census ZCTA Gazetteer; Census TIGERweb Iowa state and county outlines. Leaflet 1.9.4 from unpkg; © OpenStreetMap contributors. Keep attribution visible and follow https://operations.osmfoundation.org/policies/tiles/ .
+For local preview, unzip and double-click Start local preview.command on this Mac. Python 3 is needed; keep the Terminal window open. Local preview is not required on GitHub Pages. Source rosters do not automatically sync into the HTML.
 
-V4 adds a colored Reset filters button in the top-right map toolbar. Both reset buttons clear search and region selection and restore the certified-starters filter. Selected regions retain their fill color and outline, with pointer events disabled so they do not intercept clicks. Selecting a region starts one zoom level closer than the V3 region-bounds view; edges may fall outside the initial viewport. Pan, zoom out, or choose Show results to see the full spread of officials.
-
-## V5 updates
-On viewports up to 760 px wide, clicking a dot or a result opens contact details in a centered modal dialog above the map controls. The dialog scrolls internally, closes with the close button, Escape, or a backdrop click, and supports shared-ZIP lists. Desktop retains anchored map popups. The display label for records whose certified flag is false is now Standard Official. This is a display classification; source certification fields have not been changed or newly verified.
-
-## Opening the download on a Mac
-Unzip and double-click Start local preview.command. Keep its Terminal window open while viewing the map. It uses Python 3 and binds only to localhost. Raw file previews omit the background tiles because they cannot provide the web referrer required by the tile service. On your website, serve the embed over HTTPS and allow referrer headers for the tile requests.
-
-## V6 updates
-The map toolbar contains only Show results, All Iowa, and Reset filters. Reset clears search and region selection, returns to All Iowa, restores the certified-starters filter, and leaves focus on the clicked reset button. It does not focus or open the region selector.
-
-## V7 updates
-Show region fits the entire selected region outline while preserving region selection, search, and the certification filter. If All Iowa is selected, Show region fits Iowa. Show Iowa fits the state without changing any filters or the selected region. Reset filters retains the V6 behavior. Selecting a region still starts with the closer town-level view; Show region provides the full-region overview.
-
-## V8 updates
-Button capitalization updated to Show Region and Reset Filters. No behavior changes.
+Regions retain the previously inferred footprints. Positions are approximate ZIP representative points, with the existing Davenport city fallback. Street addresses are excluded from the widget. Bill Neal's duplicate was consolidated; the two possible Alecia duplicates remain. Justin Parson's phone remains unavailable in the public card until verified.
