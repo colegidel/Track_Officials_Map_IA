@@ -43,7 +43,7 @@
    <div id="io-results" class="io-results" aria-label="Matching officials"></div>
   </aside>
   <div class="io-map-area">
-   <div class="io-map-toolbar"><div class="io-map-actions"><button type="button" id="io-fit">Show Region</button><button type="button" id="io-state">Show State</button><button type="button" id="io-reset-map">Reset Filters</button></div></div>
+   <div class="io-map-toolbar"><div class="io-map-actions"><button type="button" id="io-fit">Show Region</button><button type="button" id="io-state">Show Iowa</button><button type="button" id="io-reset-map">Reset Filters</button></div></div>
    <div id="io-notice" class="io-notice" role="status"></div><div id="io-map" aria-label="Interactive map of Iowa officials"></div>
    <div class="io-legend"><span><i class="io-dot"></i> Certified starter</span><span><i class="io-dot gray"></i> Standard Official</span><span><b>2+</b> Multiple officials in a ZIP</span></div>
   </div>
@@ -77,7 +77,7 @@ const search=el('io-search'), certified=el('io-certified'), results=el('io-resul
 const stateBounds=[[40.375,-96.65],[43.55,-90.1]];
 let map,markers,regionLayer,filtered=[];
 const regionSelect=el("io-region");
-function selectRegion(region,focusRegion=false){regionSelect.value=region;draw();region?fitRegion(region):fitIowa();if(focusRegion)regionSelect.focus({preventScroll:true});}
+function selectRegion(region){regionSelect.value=region;draw();region?fitRegion(region):fitIowa();}
 function fitIowa(){if(map) map.fitBounds(stateBounds,{padding:[18,18]});}
 function fitRegion(region){if(!map)return;const bounds=L.latLngBounds([]);regionLayer.eachLayer(l=>{if(l.feature.properties.region===region)bounds.extend(l.getBounds());});filtered.forEach(o=>bounds.extend([o.lat,o.lng]));if(bounds.isValid()){const fittedZoom=map.getBoundsZoom(bounds,false,L.point(48,48));map.setView(bounds.getCenter(),Math.min(fittedZoom+1,map.getMaxZoom()));}}
 function regionStyle(f){const r=f.properties.region;const active=regionSelect.value;return {className:'io-region-shape',color:colors[r],weight:1.5,opacity:active?(active===r?.75:0):.75,fillColor:colors[r],fillOpacity:active?(active===r?.14:0):.14};}
@@ -128,7 +128,7 @@ if(window.L){
  l.bindTooltip(r+' Region',{sticky:true});
  l.on('mouseover',()=>{if(!regionSelect.value)l.setStyle({fillOpacity:.25,weight:2});});
  l.on('mouseout',()=>regionLayer.resetStyle(l));
- l.on('click',()=>{if(!regionSelect.value)selectRegion(r,true);});
+ l.on('click',()=>{if(!regionSelect.value)selectRegion(r);});
  }}).addTo(map);
  L.geoJSON(iowa,{interactive:false,style:{color:'#4b6c7c',weight:2,fillColor:'#d9e5df',fillOpacity:0.07}}).addTo(map);
  markers=L.layerGroup().addTo(map);
