@@ -44,6 +44,8 @@
 #iowa-officials .maplibregl-popup-content{font:13px/1.5 system-ui,sans-serif;padding:24px 18px 16px;border-radius:10px;max-height:350px;overflow:auto;overflow-wrap:anywhere}
 #iowa-officials .maplibregl-popup-close-button{width:30px;height:30px;font-size:24px}
 #iowa-officials .maplibregl-ctrl-attrib{font-size:10px}
+
+#iowa-officials .maplibregl-popup{z-index:10}
 </style>
 <section id="iowa-officials" aria-label="Iowa track officials directory">
  <div class="io-main">
@@ -53,7 +55,7 @@
     <div><label class="io-label io-search-label" for="io-search">Find an official</label><input type="search" id="io-search" placeholder="Name, city, or ZIP" autocomplete="off"></div>
     <label class="io-toggle"><input type="checkbox" id="io-certified" checked> Certified starters only</label>
    </div>
-   <div class="io-summary"><strong id="io-count" role="status" aria-live="polite"></strong><button class="io-text-button" id="io-reset" type="button">Reset Filters</button></div>
+   <div class="io-summary"><strong id="io-count" role="status" aria-live="polite"></strong></div>
    <div id="io-results" class="io-results" aria-label="Matching officials"></div>
   </aside>
   <div class="io-map-area">
@@ -101,11 +103,7 @@ function boundsFor(region){
 function fitIowa(){if(map)map.fitBounds(stateBounds,{padding:18,duration:350});}
 function showFullRegion(){if(!map)return;map.fitBounds(regionSelect.value?boundsFor(regionSelect.value):stateBounds,{padding:24,duration:350});}
 function fitRegion(region){
- if(!map)return;
- const b=boundsFor(region);
- // Keep the one-step closer regional view requested in V4.
- const c=map.cameraForBounds(b,{padding:24});
- if(c)map.easeTo({center:c.center,zoom:Math.min(c.zoom+1,15),duration:350});
+ if(map)map.fitBounds(boundsFor(region),{padding:24,duration:350});
 }
 function fit(){if(map&&filtered.length){const b=new maplibregl.LngLatBounds();filtered.forEach(o=>b.extend([o.lng,o.lat]));map.fitBounds(b,{padding:40,maxZoom:10,duration:250});}}
 function selectRegion(region){
@@ -119,13 +117,8 @@ function highlight(id){results.querySelectorAll('button[data-id]').forEach(b=>b.
 function card(o){return `<article class="io-contact"><h2>${esc(fullName(o))}</h2><p>${o.certified?'Certified Starter':'Standard Official'}</p><p>${esc(o.city)}, ${esc(o.state)} · ${esc(o.zip)} · ${esc(o.region)} Region</p><p>${o.phone?esc(o.phone):"Phone not verified"}<br>${esc(o.email)}</p><div class="io-links">${o.phone?`<a href="tel:${o.phone.replace(/[^\d+]/g,'')}" aria-label="Call ${esc(fullName(o))}">Call</a>`:""}<a href="mailto:${esc(o.email)}" aria-label="Email ${esc(fullName(o))}">Email</a></div></article>`;}
 function openContact(html,point){
  if(activePopup){activePopup.remove();activePopup=null;}
- if(mobileQuery.matches){
-  el('io-mobile-contact-body').innerHTML=html;
-  if(!mobileContact.open)mobileContact.showModal();
- }else if(map){
-  activePopup=new maplibregl.Popup({maxWidth:'320px',offset:18,closeOnClick:true})
-   .setLngLat(point).setHTML(html).addTo(map);
- }else {notice('Map unavailable. Contact details appear below.');el('io-map').innerHTML=html;}
+ el('io-mobile-contact-body').innerHTML=html;
+ if(!mobileContact.open)mobileContact.showModal();
 }
 function choose(o){
  highlight(o.id);
@@ -176,9 +169,23 @@ function draw(){
 if(window.maplibregl){
  try{
   map=new maplibregl.Map({container:el('io-map'),style:'https://tiles.openfreemap.org/styles/liberty',
-   center:[-93.4,42],zoom:6,minZoom:5,maxZoom:15,attributionControl:true});
+   center:[-93.4,42],zoom:6,minZoom:5,maxZoom:15,attributionControl:false});
   map.scrollZoom.disable();map.dragRotate.disable();map.touchZoomRotate.disableRotation();
   map.addControl(new maplibregl.NavigationControl({showCompass:false}),'top-left');
+  map.addControl(new maplibregl.AttributionControl({compact:true}),'bottom-right');
+  // Compact mode controls size; explicitly set the initial open state too.
+  const attributionDetails=map.getContainer().querySelector('.maplibregl-ctrl-attrib');
+  let attributionTouched=false;
+  attributionDetails.querySelector('summary').addEventListener('click',()=>{attributionTouched=true;});
+  function collapseInitialAttribution(){
+   if(attributionTouched)return;
+   attributionDetails.open=false;
+   attributionDetails.classList.remove('maplibregl-compact-show');
+  }
+  collapseInitialAttribution();
+  map.once('load',collapseInitialAttribution);
+  map.once('idle',collapseInitialAttribution);
+
   map.on('load',()=>{
    const color=['match',['get','region'],...Object.entries(colors).flat(),'#71818b'];
    const before=map.getStyle().layers.find(l=>l.type==='symbol')?.id;
@@ -220,7 +227,6 @@ search.addEventListener('input',()=>{draw();fit();});
 certified.addEventListener('change',()=>{draw();fit();});
 regionSelect.addEventListener('change',()=>selectRegion(regionSelect.value));
 function resetFilters(){search.value='';certified.checked=true;selectRegion('');}
-el('io-reset').addEventListener('click',resetFilters);
 el('io-reset-map').addEventListener('click',resetFilters);
 el('io-fit').addEventListener('click',showFullRegion);
 el('io-state').addEventListener('click',fitIowa);
